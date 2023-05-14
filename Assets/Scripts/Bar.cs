@@ -21,20 +21,16 @@ public class Bar : MonoBehaviour
 
     private void Render(float currentValue, float maxValue)
     {
-        if (_currentCoroutine == null)
-        {
-            StartCoroutine(ChangeValueSmoothly(currentValue / maxValue));
-        }
-        else
-        {
+        if (_currentCoroutine != null)
             StopCoroutine(_currentCoroutine);
-            StartCoroutine(ChangeValueSmoothly(currentValue / maxValue));
-        }
+
+        float healthValue = currentValue / maxValue;
+        _currentCoroutine = StartCoroutine(ChangeValueSmoothly(healthValue));
     }
 
     private IEnumerator ChangeValueSmoothly(float targetValue)
     {
-        float changeSpeed = .2f;
+        float changeSpeed = .3f;
         
         while (_filledArea.fillAmount != targetValue)
         {

@@ -33,14 +33,10 @@ public class Player : MonoBehaviour
         if (_currentHealth == _maxHealth)
             return;
         
-        if (_currentHealth + _healValue > _maxHealth)
-        {
-            _currentHealth += (_healValue + _currentHealth) - _maxHealth; // TODO
-        }
-        else
-        {
-            _currentHealth += _healValue;
-        }
+        _currentHealth += _healValue;
+        
+        if (_currentHealth > _maxHealth)
+            _currentHealth = _maxHealth;
 
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
